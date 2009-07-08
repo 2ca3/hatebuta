@@ -1,0 +1,35 @@
+<h1>New hatebuta</h1>
+
+<% form_for(@hatebuta) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :hatebuta_key %><br />
+    <%= f.text_field :hatebuta_key %>
+  </p>
+  <p>
+    <%= f.label :timeline_key %><br />
+    <%= f.text_field :timeline_key %>
+  </p>
+  <p>
+    <%= f.label :timeline_id %><br />
+    <%= f.text_field :timeline_id %>
+  </p>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :open_level %><br />
+    <%= f.check_box :open_level %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', hatebutas_path %>

@@ -1,0 +1,33 @@
+<p>
+  <b>Hatebuta key:</b>
+  <%=h @hatebuta.hatebuta_key %>
+</p>
+
+<p>
+  <b>Timeline key:</b>
+  <%=h @hatebuta.timeline_key %>
+</p>
+
+<p>
+  <b>Timeline:</b>
+  <%=h @hatebuta.timeline_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%=h @hatebuta.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @hatebuta.description %>
+</p>
+
+<p>
+  <b>Open level:</b>
+  <%=h @hatebuta.open_level %>
+</p>
+
+
+<%= link_to 'Edit', edit_hatebuta_path(@hatebuta) %> |
+<%= link_to 'Back', hatebutas_path %>

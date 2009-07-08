@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  hatebuta_key: MyString
+  timeline_key: MyString
+  timeline_id: 1
+  title: MyString
+  description: MyString
+  open_level: false
+
+two:
+  hatebuta_key: MyString
+  timeline_key: MyString
+  timeline_id: 1
+  title: MyString
+  description: MyString
+  open_level: false
