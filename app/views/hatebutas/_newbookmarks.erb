@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th>Hatebuta key</th>
+    <th>Timeline key</th>
+    <th>Timeline</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Open level</th>
+  </tr>
+
+<% @hatebutas.each do |hatebuta| %>
+  <tr>
+    <td><%=h hatebuta.hatebuta_key %></td>
+    <td><%=h hatebuta.timeline_key %></td>
+    <td><%=h hatebuta.timeline_id %></td>
+    <td><%=h hatebuta.title %></td>
+    <td><%=h hatebuta.description %></td>
+    <td><%=h hatebuta.open_level %></td>
+    <td><%= link_to 'Show', hatebuta %></td>
+    <td><%= link_to 'Edit', edit_hatebuta_path(hatebuta) %></td>
+    <td><%= link_to 'Destroy', hatebuta, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,34 +1,26 @@
-<h1>New hatebuta</h1>
+<h1>はたブタを始める</h1>
 
 <% form_for(@hatebuta) do |f| %>
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :hatebuta_key %><br />
-    <%= f.text_field :hatebuta_key %>
-  </p>
-  <p>
-    <%= f.label :timeline_key %><br />
+    <%= f.label "タイムラインAPIキー" %><a href="http://timeline.nifty.com/my_page/apikey" target="_blank">確認する</a><br />
     <%= f.text_field :timeline_key %>
+    <a href="http://help.timeline.nifty.com/cs/help/detail/070806007668/1.htm" target="_blank">これはなに？</a>
   </p>
   <p>
-    <%= f.label :timeline_id %><br />
-    <%= f.text_field :timeline_id %>
-  </p>
-  <p>
-    <%= f.label :title %><br />
+    <%= f.label "タイトル" %><br />
     <%= f.text_field :title %>
   </p>
   <p>
-    <%= f.label :description %><br />
+    <%= f.label "概要" %><br />
     <%= f.text_field :description %>
   </p>
   <p>
-    <%= f.label :open_level %><br />
-    <%= f.check_box :open_level %>
+    <%= f.check_box :open_level %>みんなに公開しない
   </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit '作成' %>
   </p>
 <% end %>
 

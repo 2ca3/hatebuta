@@ -3,6 +3,8 @@ class HatebutasController < ApplicationController
 	require 'uri'
   require 'open-uri'
   require 'base64'
+  require 'digest/md5'
+
 	$KCODE = 'UTF-8'
 	Net::HTTP.version_1_2   # おまじない
   skip_before_filter :verify_authenticity_token ,:only=>[:hook]
@@ -49,7 +51,7 @@ class HatebutasController < ApplicationController
   # POST /hatebutas.xml
   def create
     @hatebuta = Hatebuta.new(params[:hatebuta])
-
+    @hatebuta.hatebuta_key = Digest::MD5.new.update(@hatebuta.timeline_id.to_s + Time.now.to_s)
     respond_to do |format|
       if @hatebuta.save
         flash[:notice] = 'Hatebuta was successfully created.'
@@ -60,8 +62,10 @@ class HatebutasController < ApplicationController
         format.xml  { render :xml => @hatebuta.errors, :status => :unprocessable_entity }
       end
 
+      open_level = 0
+      open_level = 1 if @hatebuta.open_level
    		Net::HTTP.start('api.timeline.nifty.com', 80) do |http|
-  			response = http.post('/api/v1/timelines/create','timeline_key='+@hatebuta.apikey+'&title='+URI.encode(@hatebuta.title)+'&description='+URI.encode(@hatebuta.description)+'&open_level=1&label_for_vaxis='+URI.encode('ブックマーク数'))
+  			response = http.post('/api/v1/timelines/create','timeline_key='+@hatebuta.timeline_key+'&title='+URI.encode(@hatebuta.title)+'&description='+URI.encode(@hatebuta.description)+'&open_level='+open_level.to_s+'&label_for_vaxis='+URI.encode('ブックマーク数'))
     		puts response.body
       end
     end
