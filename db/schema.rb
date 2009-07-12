@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090708142552) do
+ActiveRecord::Schema.define(:version => 20090712142552) do
+
+  create_table "bookmarks", :force => true do |t|
+    t.string   "username"
+    t.string   "title"
+    t.string   "url"
+    t.integer  "count"
+    t.boolean  "status"
+    t.string   "comment"
+    t.boolean  "is_private"
+    t.datetime "timestamp"
+    t.string   "key"
+  end
 
   create_table "hatebutas", :force => true do |t|
     t.string   "hatebuta_key"
