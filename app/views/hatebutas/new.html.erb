@@ -1,4 +1,4 @@
-<h1>はたブタを始める</h1>
+<h2>はたブタを始める</h2>
 
 <% form_for(@hatebuta) do |f| %>
   <%= f.error_messages %>
@@ -17,7 +17,7 @@
     <%= f.text_field :description %>
   </p>
   <p>
-    <%= f.check_box :open_level ,{'checked' => 'checked'} %>みんなに公開する
+    <%= f.check_box :open_level ,{'checked' => 'checked'} %>公開する
   </p>
   <p>
     <%= f.submit '作成' %>
