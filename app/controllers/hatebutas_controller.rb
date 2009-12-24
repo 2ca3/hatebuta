@@ -56,11 +56,10 @@ class HatebutasController < ApplicationController
     respond_to do |format|
       open_level = 1
       open_level = 0 if @hatebuta.open_level
-#   		Net::HTTP.start('api.timeline.nifty.com', 80) do |http|
-#  			response = http.post('/api/v1/timelines/create','timeline_key='+@hatebuta.timeline_key+'&title='+URI.encode(@hatebuta.title)+'&description='+URI.encode(@hatebuta.description)+'&open_level='+open_level.to_s+'&label_for_vaxis='+URI.encode('ブックマーク数'))
-#        puts response.body
-#        @hatebuta.timeline_id = REXML::Document.new(response.body).elements['/response/result/timeline/id'].text
-#      end
+   		Net::HTTP.start('api.timeline.nifty.com', 80) do |http|
+  			response = http.post('/api/v1/timelines/create','timeline_key='+@hatebuta.timeline_key+'&title='+URI.encode(@hatebuta.title)+'&description='+URI.encode(@hatebuta.description)+'&open_level='+open_level.to_s+'&label_for_vaxis='+URI.encode('ブックマーク数'))
+        @hatebuta.timeline_id = REXML::Document.new(response.body).elements['/response/result/timeline/id'].text
+      end
 
       if @hatebuta.save
         flash[:notice] = 'Hatebuta was successfully created.'
@@ -101,7 +100,7 @@ class HatebutasController < ApplicationController
 #    end
 #  end
 
-    # HOOK /favorite2timelines/1
+  # HOOK /favorite2timelines/1
   # HOOK /favorite2timelines/1.xml
   def hook
     if params[:status] == 'add' || params[:status] == 'favorite:add'
@@ -126,8 +125,6 @@ class HatebutasController < ApplicationController
         @bookmark.key =  params[:key]
         @bookmark.save
       end
-      #end
-      #render response.body
     end
     redirect_to(hatebutas_url)
   end
