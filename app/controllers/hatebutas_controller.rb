@@ -13,9 +13,8 @@ class HatebutasController < ApplicationController
   # GET /hatebutas
   # GET /hatebutas.xml
   def index
-    @hatebutas = Hatebuta.find(:all, :conditions => ['open_level = ?', true], :order => 'created_at desc', :limit => 5)
-#    @bookmarks = Bookmark.find(:all, :conditions => ['is_private = ?', false], :order => 'timestamp desc', :limit => 10) 
-    @bookmarks = Bookmark.find(:all, :conditions => ['is_private = ?', false], :order => 'timestamp desc') 
+    @hatebutas = Hatebuta.find(:all, :conditions => ['open_level = ?', true], :order => 'created_at desc', :limit => 3)
+    @bookmarks = Bookmark.find(:all, :conditions => ['is_private = ?', false], :order => 'timestamp desc', :limit => 5) 
 
     respond_to do |format|
       format.html # index.html.erb
