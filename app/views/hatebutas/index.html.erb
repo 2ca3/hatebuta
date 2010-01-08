@@ -1,22 +1,21 @@
-<%= link_to 'はてブタを作る', new_hatebuta_path %>
 <h2>最近作成されたはてブタ</h2>
 <ol id="hatebuta_list">
 <% @hatebutas.each do |hatebuta| %>
   <li>
-  <span><%=h hatebuta.title %></span>
-    <span><%=h hatebuta.description %></span>
+  <span><%= link_to hatebuta.title, "http://timeline.nifty.com/portal/show/#{hatebuta.timeline_id}", :target=>"_blank" %></span>
+  <span><%=h hatebuta.description %></span>
   </li>
 <% end %>
 </ol>
-
+<%= link_to "はてブタを作る", new_hatebuta_path %>
 
 <h2>最近のブックマーク</h2>
 <ol id="bookmark_list">
 <% @bookmarks.each do |bookmark| %>
   <li>
-    <span><%= link_to bookmark.title, bookmark.url %></span>
-    <span><%= link_to image_tag('http://b.hatena.ne.jp/entry/image/' + bookmark.url, { :border => '0', :alt => bookmark.title}), 'http://b.hatena.ne.jp/entry/' + bookmark.url, :target => '_blank' %></span>
-    <span>id:<%=h bookmark.username %></span><br />
+  <span><%= link_to bookmark.title, bookmark.url, :target=>'_blank' %></span>
+  <span><%= link_to image_tag("http://b.hatena.ne.jp/entry/image/#{bookmark.url}", { :border => "0", :alt => bookmark.title}), "http://b.hatena.ne.jp/entry/#{bookmark.url}", :target => "_blank" %></span>
+  <span><%= link_to "id:#{bookmark.username}", "http://b.hatena.ne.jp/#{bookmark.username}/", :target=>"_blank" %></span><br />
     <span id="comment"><%=h bookmark.comment %></span>
   </li>
 <% end %>

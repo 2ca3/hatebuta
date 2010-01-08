@@ -5,9 +5,11 @@
 	$KCODE = 'UTF-8'
   #	 wget --post-data 'username=2ca3' http://192.168.0.4:3000/hatebu2timelines/hook
   Net::HTTP.version_1_2   # おまじない
+  # http://hatebuta.heroku.com/hatebutas/hook/
   Net::HTTP.start('localhost', 3000) do |http|
+  #Net::HTTP.start('hatebuta.heroku.com', 80) do |http|
   #Net::HTTP.start('2ca3.dyndns.org', 80) do |http|
-			response = http.post('/hatebutas/hook','username=k2ca3&title='+URI.encode('タイトル2')+'&url='+URI.encode('http://2ca3.dyndns.org')+'&count=300&status=favorite:add&comment='+URI.encode('[これはすごい]よく頑張った')+'&is_private=0&key=ab9d61168a8ce9c8269ea6258d3eee70')
+			response = http.post('/hatebutas/hook','username=k2ca3&title='+URI.encode('hoooooooge')+'&url='+URI.encode('http://teiki.saiyo.jp/canon-mj2011/contents/dm_2/index.html')+'&count=300&status=favorite:add&comment='+URI.encode('よく頑張った')+'&is_private=0&key=cd5d5652e0bd841f9a29a1cf72b77006&timestamp='+URI.encode('2009-12-27T00:48:53 09:00'))
       #response = http.get('/hatebu2timelines/hook')
       #response = http.post('/hatebu2timelines/create/1','')
       puts response.body

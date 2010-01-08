@@ -14,7 +14,8 @@ class HatebutasController < ApplicationController
   # GET /hatebutas.xml
   def index
     @hatebutas = Hatebuta.find(:all, :conditions => ['open_level = ?', true], :order => 'created_at desc', :limit => 5)
-    @bookmarks = Bookmark.find(:all, :conditions => ['is_private = ?', false], :order => 'timestamp desc', :limit => 10) 
+#    @bookmarks = Bookmark.find(:all, :conditions => ['is_private = ?', false], :order => 'timestamp desc', :limit => 10) 
+    @bookmarks = Bookmark.find(:all, :conditions => ['is_private = ?', false], :order => 'timestamp desc') 
 
     respond_to do |format|
       format.html # index.html.erb
@@ -62,7 +63,7 @@ class HatebutasController < ApplicationController
       end
 
       if @hatebuta.save
-        flash[:notice] = 'Hatebuta was successfully created.'
+        flash[:notice] = 'はてブタの作成が完了しました'
         format.html # create.html.erb
         format.xml  { render :xml => @hatebuta, :status => :created, :location => @hatebuta }
       else
@@ -107,9 +108,22 @@ class HatebutasController < ApplicationController
       @hatebuta = Hatebuta.find(:first, :conditions => ['hatebuta_key = ?', params[:key]])
       #open('http://www.hatena.ne.jp/users/k2/k2ca3/profile.gif', 'rb') do |f|
       #profile = Base64.encode64(f.binmode.read)
+      query_hash = {"timeline_key" => @hatebuta.timeline_key,
+                    "timeline_id" => @hatebuta.timeline_id.to_s,
+                    "title" => params[:title],
+                    "description" => "#{params[:comment]} bookmark by #{params[:username]}",
+                    "link" => params[:url],
+                    "grade" => params[:count],
+                    "start_time" => (Time.now+8*60*60).strftime("%Y-%m-%d %H:%M:%S"),
+                    "end_time" => (Time.now+8*60*60).strftime("%Y-%m-%d %H:%M:%S") 
+                   }
+      query_string = query_hash.map do |key,value|
+        "#{key}=#{URI.encode(value)}"
+      end.join("&")
+
       begin
         Net::HTTP.start('api.timeline.nifty.com', 80) do |http|
-          http.post('/api/v1/articles/create/','timeline_key='+@hatebuta.timeline_key+'&timeline_id='+@hatebuta.timeline_id.to_s+'&title='+params[:title]+' bookmark by '+params[:username]+params[:comment][params[:comment].index('['),params[:comment].rindex(']')+1]+'&description='+params[:comment]+'&link='+params[:url]+'&grade='+params[:count]+'&start_time='+Time.now.to_s+'&end_time='+Time.now.to_s)
+          http.post('/api/v1/articles/create/',query_string)
         end
       rescue
       else
@@ -125,6 +139,10 @@ class HatebutasController < ApplicationController
         @bookmark.key =  params[:key]
         @bookmark.save
       end
+    end
+    Net::HTTP.start('gaeo-tkwaves.appspot.com', 80) do |http|
+      response = http.get("/guestbook/create?username=#{params[:username]}%20#{URI.encode(params[:title])}%20#{params[:url]}%20#{params[:count]}%20#{params[:status]}%20#{URI.encode(params[:comment])}%20#{params[:is_private]}%20#{params[:key]}&content=#{URI.encode(params[:timestamp])}hogehoge")
+      puts response.body
     end
     redirect_to(hatebutas_url)
   end

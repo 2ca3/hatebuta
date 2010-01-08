@@ -5,89 +5,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>はてブタ: <%= controller.action_name %></title>
-  <style type="text/css">
-/* レイアウトの設定*/
-body{
-    margin:0px;
-    padding:0px;
-    text-align:center;
-    width:100%;
-}
-/* ラッパーの設定*/
-#wrap{
-    position:relative;
-    width:800px;
-    background-color:#FFFFFF;
-    text-align:left;
-    margin:5px auto;  
-    border-style:double;  
-}
-/* ヘッダーの設定*/
-#head{
-    width:794px;
-    height:130px;
-    background-color:#FFFFFF;
-    border-style:none;
-}
-/* 左側の設定*/
-#left{
-    width:580px;
-    word-break:break-all;
-    height:500px;
-    float:left;
-    background-color:#FFFFFF;
-    padding:0 0 0 20px;  
-    border-style:double solid double none;
-}
-/* 右側の設定*/
-#right{
-    width:197px;
-    height:480px;
-    float:right;
-    text-align:center;
-    background-color:#CCFFFF;
-    padding:20px 0 0 0;
-    border-style:double none double none;
-  }
-
-/* はてブタリスト*/
-#hatebuta_list{
-}
-
-/* Bookmarkリスト*/
-#bookmark_list{
-}
-
-#comment {
-  color: #009525;
-}
-
-#example_url {
-  font-size: small;
-  color: #A38787;
-}
-
-.config_sub1 {
-  background-color:#f4ffea;
-  border-top:1px solid #3399ff;
-  border-bottom:1px solid #3399ff;
-  border-left:1px solid #3399ff;
-  border-right:1px solid #3399ff;
-}
-
-.config_sub2 {
-  background-color:#f4ffea;
-}
-
-#foot{
-    position:relative;
-    width:800px;
-    height:100px;
-    background-color:#CC9999;
-    border-style:none;
-    clear:both;
-}
-</style>
+  <%= stylesheet_link_tag "hatebuta" %>
 </head>
 <body>
 <!--  ********* メインコンテンツ ******** --> 
@@ -118,7 +36,7 @@ body{
  
 	<!-- ********* フッター ******** --> 
 	<div id="foot"> 
-    hatebuta, developed by Tsukasa Kobayashi and
+    hatebuta, developed by 2ca3(Tsukasa) and
     <a href="http://timeline.nifty.com/" title="@nifty TimeLine" target="_blank"><img src="http://timeline.nifty.com/images/logo_api_timeline_2.gif" border="0" /></a> and 
     <a href="http://b.hatena.ne.jp/" title="はてなブックマーク" target="_blank">はてなブックマーク</a>
 	</div> 
